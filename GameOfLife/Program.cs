@@ -47,15 +47,57 @@ internal class Program
                 Console.WriteLine($"Game {(running ? "Resumed" : "Paused")}!");
                 Thread.Sleep(200);
             }
+            bool Rdown = Keyboard.IsKeyPressed(Keyboard.Key.R);
+            if (Rdown)
+            {
+                bool wasdown = running;
+                running = false;
+                Console.WriteLine($"Importing data..");
+                Grid.ReadData();
+                Thread.Sleep(10);
+                Console.WriteLine($"Data has been imported");
+                if (wasdown)
+                    running = true;
+                Thread.Sleep(400);
+            }
+            bool Edown = Keyboard.IsKeyPressed(Keyboard.Key.E);
+            if (Edown)
+            {
+                bool wasdown = running;
+                running = false;
+                Console.WriteLine($"Exporting data..");
+                Grid.WriteData();
+                Thread.Sleep(10);
+                Console.WriteLine($"Data has been exported");
+                if (wasdown)
+                    running = true;
+                Thread.Sleep(400);
+            }
+            bool Cdown = Keyboard.IsKeyPressed(Keyboard.Key.C);
+            if (Cdown)
+            {
+                running = false;
+                Grid.Fill(0);
+                Console.WriteLine($"Screen Cleared!");
+                Thread.Sleep(400);
+            }
+            bool Fdown = Keyboard.IsKeyPressed(Keyboard.Key.F);
+            if (Fdown)
+            {
+                running = false;
+                Grid.Fill(1);
+                Console.WriteLine($"Screen Filled!");
+                Thread.Sleep(400);
+            }
         }
     }
 
     private static void RW_MouseButtonPressed(object? sender, MouseButtonEventArgs e)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine($"MouseDown X:{e.X}, Y:{e.Y}");
+        //Console.WriteLine($"MouseDown X:{e.X}, Y:{e.Y}");
 
-        Console.ForegroundColor = ConsoleColor.Red;
+        //Console.ForegroundColor = ConsoleColor.Red;
         var newX = e.Y / (Scale / gridSize);
         var newY = e.X / (Scale / gridSize);
         Console.WriteLine($"MouseDown X:{newX}, Y:{newY}");

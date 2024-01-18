@@ -167,10 +167,18 @@ namespace GameOfLife
             }
         }
 
+        public void Fill(byte Value)
+        {
+            for (int i = 0; i < gridSize * gridSize; i++)
+            {
+                data[i] = Value;
+            }
+        }
+
         public byte GetValue(int x, int y)
         {
             // Calculate the index in the 1D array
-            int index = x * gridSize + y;
+            int index = x * gridSize * gridSize + y;
 
             // Access the value in the 1D array
             return data[index];
