@@ -68,6 +68,8 @@ namespace FriedPixelWindow
             SetupSfmlWindow(framerateLimit);
         }
 
+        public RenderWindow GetRenderWindow() => _renderWindow;
+
         private void SetupSfmlWindow(uint framerateLimit)
         {
             _renderWindow = new RenderWindow(
