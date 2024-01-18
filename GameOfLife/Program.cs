@@ -8,10 +8,10 @@ internal class Program
 {
     public const int waitTime = 50;
     public const int gridSize = 100;
-    public const int Scale = 800;
+    public const int Scale = 1000;
     public const int size = gridSize * gridSize;
     public static Grid Grid = new Grid(gridSize);
-    public static bool running = true;
+    public static bool running = false;
     public static RenderWindow RW;
 
     private static void Main(string[] args)
@@ -88,6 +88,31 @@ internal class Program
                 Grid.Fill(1);
                 Console.WriteLine($"Screen Filled!");
                 Thread.Sleep(400);
+            }
+            bool Sdown = Keyboard.IsKeyPressed(Keyboard.Key.S);
+            if (Sdown)
+            {
+                running = false;
+                Console.WriteLine($"Stepping");
+                Thread.Sleep(10);
+                Grid.Step();
+                Thread.Sleep(200);
+            }
+            bool Ddown = Keyboard.IsKeyPressed(Keyboard.Key.D);
+            if (Ddown)
+            {
+                Grid.Debug = !Grid.Debug;
+                Console.WriteLine($"Debug {(running ? "Enabled" : "Disabled")}!");
+                Thread.Sleep(200);
+            }
+            bool Vdown = Keyboard.IsKeyPressed(Keyboard.Key.V);
+            if (Vdown)
+            {
+                Grid.PreCalc();
+                Grid.Debug = true;
+                Console.WriteLine($"Debug Enabled");
+                Console.WriteLine("Calculated the cells");
+                Thread.Sleep(200);
             }
         }
     }
